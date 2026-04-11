@@ -1,3 +1,141 @@
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: #000; color: #fff; -webkit-font-smoothing: antialiased; }
-#root { min-height: 100vh; }
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Georgia", "Times New Roman", serif;
+  --font-sans: "Helvetica Neue", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+/* ─── Base (scoped to @layer base so Tailwind utilities still win) ─── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: #000;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #000;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #000 inset !important;
+    -webkit-text-fill-color: #fff !important;
+  }
+}
+
+/* ─── DecryptedText helpers (class-based, cascade-safe) ─── */
+.decrypt-revealed {
+  color: #fff;
+}
+.decrypt-scrambled {
+  color: rgba(255, 255, 255, 0.18);
+}
+.decrypt-revealed-dim {
+  color: rgba(255, 255, 255, 0.25);
+}
+.decrypt-scrambled-dim {
+  color: rgba(255, 255, 255, 0.08);
+}
+
+/* ─── Keyframes ─── */
+@keyframes marquee-forward {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes marquee-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes scrollBar {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  50% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  51% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+.marquee-forward {
+  animation: marquee-forward 28s linear infinite;
+}
+.marquee-reverse {
+  animation: marquee-reverse 28s linear infinite;
+}
+.marquee-forward:hover,
+.marquee-reverse:hover {
+  animation-play-state: paused;
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+.animate-blink-slow {
+  animation: blink 2s ease infinite;
+}
+.animate-scroll-bar {
+  animation: scrollBar 2s ease infinite;
+}
+
+/* ─── Nav hamburger ─── */
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: #fff;
+  margin: 5px auto;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.nav-hamburger.open span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.nav-hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.nav-hamburger.open span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
