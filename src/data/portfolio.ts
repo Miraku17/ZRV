@@ -14,6 +14,8 @@ export interface Project {
   repo?: string;
   /** Optional static screenshot. If omitted but `link` is set, a live screenshot is fetched. */
   image?: string;
+  /** Optional gallery of screenshots. When present, the card preview is clickable and opens a lightbox. */
+  images?: string[];
 }
 
 export interface Experience {
@@ -141,6 +143,58 @@ export const PROJECTS: Project[] = [
     tier: 'Client',
     link: 'https://velocitypickleballcebu.com/',
     repo: 'https://github.com/Miraku17/velocity-hub',
+  },
+  {
+    id: '10',
+    title: 'Bedrock 360 Accounting',
+    description:
+      'Cloud-based accounting software for streamlined bookkeeping, financial reporting, and business finance management.',
+    tech: ['Next.js', 'Supabase', 'Vercel'],
+    tier: 'Client',
+    link: 'https://www.bedrock360accounting.com/',
+    repo: 'https://github.com/Miraku17/bedrock-360',
+  },
+  {
+    id: '11',
+    title: 'Hyperliquid Trading Bot',
+    description:
+      'AI-powered automated trading bot for the Hyperliquid exchange. Executes algorithmic strategies with real-time market data and risk management.',
+    tech: ['Python', 'Hyperliquid API', 'AI'],
+    tier: 'Personal',
+    repo: 'https://github.com/Miraku17/hyperliquid-trading-bot',
+  },
+  {
+    id: '12',
+    title: 'ETH Dashboard',
+    description:
+      'Ethereum analytics dashboard for tracking wallet activity, token balances, and on-chain data with real-time market insights.',
+    tech: ['Next.js', 'Ethers.js', 'Tailwind'],
+    tier: 'Personal',
+    repo: 'https://github.com/Miraku17/eth-dashboard',
+  },
+  {
+    id: '13',
+    title: 'ClipNET',
+    description:
+      'Clip management platform and source of truth for clip approvals, upload readiness, and queue state. Features an ML scoring service that ranks clips and a shared Discord bot (ClipBOT) that posts approved clips on a schedule.',
+    tech: ['Next.js', 'FastAPI', 'PostgreSQL', 'Gemini'],
+    tier: 'Personal',
+    link: 'https://clipnet.ai/',
+  },
+  {
+    id: '14',
+    title: 'GestureBee',
+    description:
+      'Real-time sign language recognition system using computer vision and deep learning. Trained with TensorFlow and Keras to reach 98.6% accuracy in gesture classification, with a Flask + Socket.IO backend streaming live hand tracking to a React frontend for accessible sign language communication.',
+    tech: ['React', 'TensorFlow', 'Keras', 'Flask', 'Socket.IO', 'Python'],
+    tier: 'Personal',
+    repo: 'https://github.com/Rhixin/GesturbeeCamera',
+    image: '/images/gesturebee/1.webp',
+    images: [
+      '/images/gesturebee/1.webp',
+      '/images/gesturebee/2.webp',
+      '/images/gesturebee/3.webp',
+    ],
   },
 ];
 

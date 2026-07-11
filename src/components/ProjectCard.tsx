@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import type { Project } from '../data/portfolio';
 import { EASE } from '../lib/animations';
+import { Lightbox } from './Lightbox';
 
 interface ProjectCardProps {
   project: Project;
@@ -35,10 +36,13 @@ const getMonogram = (title: string): string =>
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   const [loaded, setLoaded] = useState(false);
   const [errored, setErrored] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const isFeatured = project.tier === 'Featured';
   const previewUrl = !errored ? getPreviewUrl(project) : null;
   const monogram = getMonogram(project.title);
+  const gallery = project.images ?? [];
+  const hasGallery = gallery.length > 0;
 
   return (
     <motion.div
@@ -50,7 +54,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       className="group relative flex h-full cursor-default flex-col overflow-hidden border border-white/10 bg-transparent transition-[border-color,background-color] duration-[350ms] ease-in-out hover:border-white/25 hover:bg-white/[0.03]"
     >
       {/* Preview area */}
-      <div className="relative aspect-[16/10] overflow-hidden border-b border-white/10 bg-white/[0.02]">
+      <div
+        className={`relative aspect-[16/10] overflow-hidden border-b border-white/10 bg-white/[0.02] ${
+          hasGallery ? 'cursor-zoom-in' : ''
+        }`}
+        onClick={hasGallery ? () => setLightboxIndex(0) : undefined}
+        role={hasGallery ? 'button' : undefined}
+        aria-label={hasGallery ? `View ${project.title} gallery` : undefined}
+      >
         {previewUrl ? (
           <>
             {/* Loading shimmer */}
@@ -78,6 +89,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
 
         {/* Top vignette fade so the image blends with the card */}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+
+        {/* Gallery badge — signals the preview is clickable */}
+        {hasGallery && (
+          <span className="pointer-events-none absolute right-2.5 top-2.5 flex items-center gap-1 border border-white/15 bg-black/40 px-2 py-0.5 font-sans text-[0.6rem] uppercase tracking-[0.12em] text-white/70 backdrop-blur-sm transition-colors duration-300 group-hover:border-white/35">
+            ⤢ {gallery.length}
+          </span>
+        )}
       </div>
 
       {/* Content */}
@@ -140,6 +158,16 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           </div>
         )}
       </div>
+
+      {hasGallery && lightboxIndex !== null && (
+        <Lightbox
+          images={gallery}
+          index={lightboxIndex}
+          title={project.title}
+          onClose={() => setLightboxIndex(null)}
+          onNavigate={setLightboxIndex}
+        />
+      )}
     </motion.div>
   );
 };
