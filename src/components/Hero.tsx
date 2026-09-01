@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import DecryptedText from './DecryptedText/DecryptedText';
-import { LetterGlitch } from './LetterGlitch';
+import { CRTWarp } from './CRTWarp/CRTWarp';
 import { useTypewriter } from '../hooks/useTypewriter';
 import { EASE, heroContainer, heroItem } from '../lib/animations';
 
@@ -16,21 +16,27 @@ export const Hero: React.FC = () => {
       id="About"
       className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-black px-5 pb-12 pt-24 md:px-8 md:pb-16 md:pt-32"
     >
-      {/* Letter Glitch background */}
+      {/* CRT Warp background */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 2 }}
         className="absolute inset-0 z-0"
       >
-        <LetterGlitch
-          glitchColors={['#111111', '#1c1c1c', '#0d0d0d']}
-          glitchSpeed={55}
-          outerVignette
-          centerVignette
-          smooth
+        <CRTWarp
+          color="#a78bfa"
+          backgroundColor="#000000"
+          brightness={0.65}
+          bloom={0.85}
+          noise={0.03}
+          vignette={0.78}
+          rgbShift={0.003}
+          mouseStrength={0.3}
         />
       </motion.div>
+
+      {/* Scrim for text legibility over the animated background */}
+      <div className="absolute inset-0 z-[1] bg-black/35" />
 
       {/* Large decorative ZRV */}
       <motion.div
@@ -75,17 +81,15 @@ export const Hero: React.FC = () => {
             encryptedClassName="decrypt-scrambled"
           />
           <br />
-          <span className="text-white/25">
-            <DecryptedText
-              text="Valles"
-              animateOn="view"
-              sequential={true}
-              revealDirection="start"
-              speed={38}
-              className="decrypt-revealed-dim"
-              encryptedClassName="decrypt-scrambled-dim"
-            />
-          </span>
+          <DecryptedText
+            text="Valles"
+            animateOn="view"
+            sequential={true}
+            revealDirection="start"
+            speed={38}
+            className="decrypt-revealed"
+            encryptedClassName="decrypt-scrambled"
+          />
         </motion.h1>
 
         {/* Typewriter title */}
@@ -94,7 +98,7 @@ export const Hero: React.FC = () => {
           className="mb-12 min-h-[3.5rem] border-l-2 border-white/30 pl-6 font-sans text-[clamp(1rem,2.5vw,1.5rem)] font-light leading-relaxed tracking-[0.01em] text-white/60"
         >
           {lines.map((line, i) => (
-            <span key={i} className="block">
+            <span key={i} className={`block ${i === 1 ? 'font-serif italic text-white/80' : ''}`}>
               {line}
               {i === lines.length - 1 && title.length < FULL_TITLE.length && (
                 <span className="ml-[2px] inline-block h-[1.2em] w-[2px] animate-blink align-text-bottom bg-white" />
@@ -106,10 +110,11 @@ export const Hero: React.FC = () => {
         {/* Bio */}
         <motion.p
           variants={heroItem}
-          className="mb-12 max-w-[560px] font-sans text-base font-light leading-[1.8] text-white/45"
+          className="mb-12 max-w-[560px] font-sans text-base font-light leading-[1.8] text-white/75"
         >
-          Building scalable systems at the intersection of software engineering and cybersecurity.
-          Currently at EY GDS Philippines — concurrently operating as a freelance developer.
+          Building scalable systems at the intersection of software engineering and cybersecurity,
+          with 3+ years shipping production-ready applications. Currently a SOC Analyst at EY GDS
+          Philippines, freelancing as a full-stack developer on the side.
         </motion.p>
 
         {/* CTA row */}
@@ -167,9 +172,6 @@ export const Hero: React.FC = () => {
         transition={{ delay: 1.8, duration: 0.8 }}
         className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2"
       >
-        <span className="font-sans text-[0.6rem] uppercase tracking-[0.2em] text-white/30">
-          Scroll
-        </span>
         <div className="h-10 w-px animate-scroll-bar bg-white/20" />
       </motion.div>
     </section>

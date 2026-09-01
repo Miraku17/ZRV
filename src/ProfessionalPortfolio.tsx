@@ -1,6 +1,7 @@
 import React from 'react';
 import { Nav } from './components/Nav';
 import { Hero } from './components/Hero';
+import { MarqueeBanner } from './components/MarqueeBanner';
 import { ExperienceSection } from './components/ExperienceSection';
 import { ProjectsSection } from './components/ProjectsSection';
 import { SkillsSection } from './components/SkillsSection';
@@ -13,6 +14,7 @@ const ProfessionalPortfolio: React.FC = () => (
     <Nav />
     <main>
       <Hero />
+      <MarqueeBanner upright="BUILD" italic="SECURE" />
       <ExperienceSection />
       <ProjectsSection />
       <SkillsSection />

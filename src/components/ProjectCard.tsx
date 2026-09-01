@@ -51,7 +51,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       viewport={{ once: true, margin: '-30px' }}
       transition={{ duration: 0.55, ease: EASE, delay: (index % 3) * 0.08 }}
       whileHover={{ y: -4 }}
-      className="group relative flex h-full cursor-default flex-col overflow-hidden border border-white/10 bg-transparent transition-[border-color,background-color] duration-[350ms] ease-in-out hover:border-white/25 hover:bg-white/[0.03]"
+      className="group relative flex h-full cursor-default flex-col overflow-hidden rounded-t-2xl border border-white/10 bg-transparent transition-[border-color,background-color] duration-[350ms] ease-in-out hover:border-white/25 hover:bg-white/[0.03]"
     >
       {/* Preview area */}
       <div

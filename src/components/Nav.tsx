@@ -33,8 +33,8 @@ export const Nav: React.FC = () => {
 
   const navBgClass =
     scrolled || menuOpen
-      ? 'bg-black/95 border-white/10 backdrop-blur-md'
-      : 'bg-transparent border-transparent';
+      ? 'bg-black/90 border-white/15'
+      : 'bg-black/40 border-white/10';
 
   return (
     <>
@@ -42,9 +42,11 @@ export const Nav: React.FC = () => {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
-        className={`fixed inset-x-0 top-0 z-[100] border-b px-5 transition-[background-color,border-color,backdrop-filter] duration-400 ease-in-out md:px-8 ${navBgClass}`}
+        className="fixed inset-x-0 top-0 z-[100] px-5 pt-4 md:px-8 md:pt-6"
       >
-        <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between">
+        <div
+          className={`mx-auto flex h-14 max-w-[1200px] items-center justify-between rounded-full border px-6 backdrop-blur-md transition-[background-color,border-color] duration-400 ease-in-out md:px-8 ${navBgClass}`}
+        >
           <a
             href="#About"
             onClick={(e) => handleNavClick(e, 'About')}
