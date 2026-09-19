@@ -58,9 +58,21 @@ export const Hero: React.FC = () => {
       >
         {/* Eyebrow */}
         <motion.div variants={heroItem} className="mb-8 flex items-center gap-4">
-          <div className="h-px w-10 bg-white" />
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.6, ease: EASE, delay: 0.35 }}
+            className="h-px w-10 origin-left bg-white"
+          />
           <span className="font-sans text-[0.7rem] uppercase tracking-[0.3em] text-white/50">
-            Portfolio · 2025
+            <DecryptedText
+              text="Hi, I'm"
+              animateOn="view"
+              sequential={true}
+              revealDirection="start"
+              speed={60}
+              encryptedClassName="decrypt-scrambled"
+            />
           </span>
         </motion.div>
 
