@@ -1,15 +1,25 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Orb24 } from '@/components/orbs/orb-24';
 import { EXPERIENCE } from '../data/portfolio';
 import { EASE } from '../lib/animations';
+import { SectionBackground } from './SectionBackground';
 import { SectionHeader } from './SectionHeader';
 
 export const ExperienceSection: React.FC = () => (
   <section
     id="Experience"
-    className="border-t border-white/[0.06] bg-black px-5 py-20 md:px-8 md:py-32"
+    className="relative overflow-hidden border-t border-white/[0.06] bg-black px-5 py-20 md:px-8 md:py-32"
   >
-    <div className="mx-auto max-w-[1000px]">
+    <SectionBackground variant="top-right" />
+    {/* Shader draws black off-sphere; screen blend lets the grid show through */}
+    <div
+      aria-hidden
+      className="pointer-events-none absolute top-1/2 right-0 z-0 aspect-square w-[min(140vw,1000px)] translate-x-1/2 -translate-y-1/2 opacity-30 mix-blend-screen md:translate-x-[45%] md:opacity-40"
+    >
+      <Orb24 state="speaking" maxDpr={1} style={{ width: '100%', height: '100%' }} />
+    </div>
+    <div className="relative z-10 mx-auto max-w-[1000px]">
       <SectionHeader eyebrow="02 / Experience" title="Work History" />
 
       <div className="relative border-l border-white/10 pl-8">
