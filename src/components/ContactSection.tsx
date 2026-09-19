@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { EASE } from '../lib/animations';
 import { FadeUp } from './FadeUp';
+import { SectionBackground } from './SectionBackground';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
@@ -18,9 +19,10 @@ export const ContactSection: React.FC = () => {
   return (
     <section
       id="Contact"
-      className="border-t border-white/[0.06] bg-black px-5 pt-20 pb-16 md:px-8 md:pt-32 md:pb-24"
+      className="relative overflow-hidden border-t border-white/[0.06] bg-black px-5 pt-20 pb-16 md:px-8 md:pt-32 md:pb-24"
     >
-      <div className="mx-auto max-w-[800px]">
+      <SectionBackground variant="top-left" />
+      <div className="relative z-10 mx-auto max-w-[800px]">
         <FadeUp>
           <div className="mb-6 flex items-baseline gap-8">
             <span className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-white/30">

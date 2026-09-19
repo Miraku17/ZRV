@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { SKILLS } from '../data/portfolio';
 import { TECH_ROW1, TECH_ROW2 } from '../data/tech';
 import { FadeUp } from './FadeUp';
+import { SectionBackground } from './SectionBackground';
 import { SectionHeader } from './SectionHeader';
 import { TechMarquee } from './TechMarquee';
 
@@ -10,8 +11,12 @@ export const SkillsSection: React.FC = () => {
   const categories = [...new Set(SKILLS.map((s) => s.category))];
 
   return (
-    <section id="Skills" className="border-t border-white/[0.06] bg-black py-20 md:py-32">
-      <div className="mx-auto max-w-[1000px] px-5 md:px-8">
+    <section
+      id="Skills"
+      className="relative overflow-hidden border-t border-white/[0.06] bg-black py-20 md:py-32"
+    >
+      <SectionBackground variant="bottom-left" />
+      <div className="relative z-10 mx-auto max-w-[1000px] px-5 md:px-8">
         <SectionHeader eyebrow="04 / Skills" title="Capabilities" />
 
         {/* Skill pills by category */}

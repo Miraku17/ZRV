@@ -2,14 +2,16 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ACHIEVEMENTS } from '../data/portfolio';
 import { EASE } from '../lib/animations';
+import { SectionBackground } from './SectionBackground';
 import { SectionHeader } from './SectionHeader';
 
 export const AchievementsSection: React.FC = () => (
   <section
     id="Achievements"
-    className="border-t border-white/[0.06] bg-[#050505] px-5 py-20 md:px-8 md:py-32"
+    className="relative overflow-hidden border-t border-white/[0.06] bg-[#050505] px-5 py-20 md:px-8 md:py-32"
   >
-    <div className="mx-auto max-w-[1000px]">
+    <SectionBackground variant="center" />
+    <div className="relative z-10 mx-auto max-w-[1000px]">
       <SectionHeader eyebrow="05 / Recognition" title="Achievements" />
 
       <div className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,260px),1fr))] gap-0.5 bg-white/[0.06]">
